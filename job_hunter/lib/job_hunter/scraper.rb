@@ -23,7 +23,7 @@ class JobHunter::Scraper
     #   end
     # end
     # jobs_list
-    binding.pry
+    # binding.pry
     puts doc
   end
 

@@ -3,16 +3,16 @@ class JobHunter::CLI
 
   def prompt_menu
   input = nil
-   while input != "exit"
-     if
-     elsif condition
-     elsif condition
-     elsif condition
-     elsif condition
-     elsif condition
-     elsif condition
-     else
-     end
+  #  while input != "exit"
+  #   #  if
+  #   #  elsif condition
+  #   #  elsif condition
+  #   #  elsif condition
+  #   #  elsif condition
+  #   #  elsif condition
+  #   #  elsif condition
+  #   #  else
+  #   #  end
    end
-   
+
 end
