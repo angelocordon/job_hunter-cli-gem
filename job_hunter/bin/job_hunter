@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require_relative "lib/job_hunter.rb"
+JobHunter::CLI.new.call
