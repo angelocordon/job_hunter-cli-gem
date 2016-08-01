@@ -1,5 +1,6 @@
 # CLI controller
-lass JobHunter::CLI
+
+class JobHunter::CLI
   def call
     puts "Hello"
 end

@@ -1,0 +1,4 @@
+class JobHunter::Jobs
+
+
+end
