@@ -1,27 +1,28 @@
+require 'open-uri'
+require 'nokogiri' # I added this
 require 'pry'
 class JobHunter::Scraper
-  #  attr_accessor
 
-  def initialize()
-    @@all =[]
-  end
 
   def self.scrape_jobs(url)
-    # parse XLM with Nokogiri
     # save information as an array of hashes with metaprogramming
     # take the string of HTML returned by open-uri's open method and convert it into a NodeSet (aka, a bunch of nested "nodes")
+    jobs_array = []
+    jobs_hash = {}
     doc = Nokogiri::XML(open(url))
     # job_name = doc.css("query").text
-    job_name = doc.css("jobtitle").text
-    job_company = doc.css("company").text
-    job_location = doc.css("location").text
-    country = doc.css("country").text
-    job_url = doc.css("url").text
-    job_description = doc.css("snippet").text
-    job_date_posted = doc.css("date").text
-    elapsed_duration_of_job_post = doc.css("formattedRelativeTime").text
-
-
+    doc.css("result").each do |job_result|
+      jobs_hash = {name: result.css("jobtitle").text,
+          company: job_result.css("company").text,
+          location: job_result.css("location").text,
+          country: job_result.css("country").text,
+          url: job_result.css("url").text,
+          description: job_result.css("snippet").text,
+          date_posted: job_result.css("date").text,
+          post_duration: job_result.css("formattedRelativeTime").text}
+      jobs_array << jobs_hash
+    end
+    puts jobs_array
     binding.pry
     # jobs_list=[]
     # jobs_hash={}
@@ -36,7 +37,6 @@ class JobHunter::Scraper
     # end
     # jobs_list
     # binding.pry
-    puts doc
   end
 
   def self.options(array_of_key_words)

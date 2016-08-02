@@ -1,5 +1,5 @@
 class JobHunter::Jobs
-  attr_accessor
+  attr_accessor :name, :company, :location, :country, :url, :description, :date_posted, :post_duration
 
   @@all = []
 
