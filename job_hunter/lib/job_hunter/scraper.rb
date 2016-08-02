@@ -12,9 +12,9 @@ class JobHunter::Scraper
     doc = Nokogiri::XML(open(url))
     # job_name = doc.css("query").text
     doc.css("result").each do |job_result|
-      jobs_hash = {name: result.css("jobtitle").text,
+      jobs_hash = {name: job_result.css("jobtitle").text,
           company: job_result.css("company").text,
-          location: job_result.css("location").text,
+          location: job_result.css("city").text + "," + job_result.css("state").text,
           country: job_result.css("country").text,
           url: job_result.css("url").text,
           description: job_result.css("snippet").text,
