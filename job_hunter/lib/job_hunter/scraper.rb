@@ -1,23 +1,17 @@
 class JobHunter::Scraper
   attr_accessor :url, :q, :co, :l, :radius
 
-  # def initialize(query='', country ='', location ='', radius ='')
-  #   @q = query
-  #   @co = country
-  #   @l = location
-  #   @radius = radius
-  # end
-
   def scrape_jobs
-    url = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{q}&#{l}&sort=&#{radius}&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&#{co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
+    uri = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{@q}&#{@l}&sort=&#{@radius}&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&#{@co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
     jobs_array = []
     jobs_hash = {}
-    doc = Nokogiri::XML(open(url))
+    doc = Nokogiri::XML(open(uri))
     # job_name = doc.css("query").text
     doc.css("result").each do |job_result|
       jobs_hash = {name: job_result.css("jobtitle").text,
           company: job_result.css("company").text,
-          location: job_result.css("city").text + "," + job_result.css("state").text,
+          city: job_result.css("city").text,
+          state: job_result.css("state").text,
           country: job_result.css("country").text,
           url: job_result.css("url").text,
           description: job_result.css("snippet").text,

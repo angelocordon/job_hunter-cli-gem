@@ -1,5 +1,5 @@
 class JobHunter::Jobs
-  attr_accessor :name, :company, :location, :country, :url, :description, :date_posted, :post_duration
+  attr_accessor :name, :company, :city, :state, :country, :url, :description, :date_posted, :post_duration
 
   @@all = []
 
@@ -9,6 +9,7 @@ class JobHunter::Jobs
      self.send("#{title}=", string)
     end
     @@all << self
+    binding.pry
   end
 
   def self.create_from_collection(jobs_array)
@@ -16,6 +17,7 @@ class JobHunter::Jobs
       self.new(jobs_hash) # mass assignment It's taking a hash with key and value pairs as arguments
       # and setting them equal to the attributes that the class has
       # handing it off to initialize
+      # binding.pry
     end
   end
 
@@ -23,7 +25,7 @@ class JobHunter::Jobs
     @@all
   end
 
-  def self.print_jobs
+  def print_jobs
     self.all.each do |attribute|
       puts attribute.name
       puts attribute.location
