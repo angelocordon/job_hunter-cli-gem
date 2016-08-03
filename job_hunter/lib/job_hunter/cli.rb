@@ -1,15 +1,69 @@
 # CLI controller
 # Decoupling
-#  - CLI communicates with:
-#     - Scraper
-#     - Jobs
+#  - CLI creates the:
+#     - Scraper object the Scraper object creates the
+#      - Jobs object and the Jobs object prints out on the CLI
 
 class JobHunter::CLI
+
+  def start
+    input =""
+    search_input =""
+    input.downcase!
+    search_input.downcase!
+    welcome_prompt
+    while input !="exit"
+      # def create_jobs_array
+      input = gets
+      scraper = JobHunter::Scraper.new
+      # if input == "q" || input == "co" || input == "l" || input == "radius"
+      #   search_input = gets.gsub(/\s+/, "")
+      # end
+      if input == 1
+        search_input = gets
+        if search_input
+          scraper.q = "q=" + search_input
+        else
+          scraper.q =""
+        end
+
+      elsif input == 2
+        search_input = gets
+        if search_input
+          scraper.co = "co=" + search_input
+        else
+          scraper.q =""
+        end
+
+      elsif input == "3"
+        search_input = gets
+        if search_input
+          scraper.l = "l=" + search_input
+        else
+          scraper.l =""
+        end
+
+      elsif input == "4"
+          search_input = gets
+        if search_input
+              scraper.radius = "radius=" + search_input
+        else
+          scraper.radius =""
+        end
+      end
+
+      if input != 1 || 2 || 3 || 4
+        puts "Oops! Looks like you entered the wrong key word. Try again!"
+      end
+        scraper.scrape_jobs
+        show_jobs
+    end
+  end
 
   def welcome_prompt
     puts "Welcome to Job_Hunter The One stop shop for finding the exact job fit!"
     puts "To customize your job search enter any or all of the options below."
-    puts "Type any of the key letters / words from 1 to 9 to start."
+    puts "Type numbers 1 to 4 to start. Then enter any of the corresponding key letters / words. "
     puts ""
 
     puts "1. q - Name of job."
@@ -17,34 +71,17 @@ class JobHunter::CLI
     puts "3. l - A postal code or a city."
     puts "4. radius - A number for distance from search location."
   end
-#
-#
-# # psuedocode
-   JobHunter::Scraper.new(url)
-#   if type q then save input as "q"
-    if input = "q"
-      search_input.gets
-#   if type co then save input as string "co"
-#   if type l then save input as string "l"
-#   if type radius then save input as string "radius"
-#   this information gets stored in an instance of the Scraper class as the attributes.
-#   Each of the 4 atributes gets passed in as an argument in the scraper url
-#   Then returns the output in the form of an instance of the jobs object below
-#
-#
-#
-#   def start
-#     input = nil
-#      while input != "exit"
-#        if
-#        elsif condition
-#        elsif condition
-#        elsif condition
-#        elsif condition
-#        elsif condition
-#        elsif condition
-#        else
-#        end
-#    end
+
+
+  def show_jobs
+    # jobs_array = JobHunter::Scraper.new.scrape_jobs
+    # jobs_hash = JobHunter::Jobs.create_from_collection(jobs_array)
+    # job_hunter = JobHunter::Jobs.new(jobs_hash)
+    JobHunter::Jobs.print_jobs
+  end
+
+  # def print_job_details
+  #
+  # end
 
 end

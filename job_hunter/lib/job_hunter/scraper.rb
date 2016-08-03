@@ -1,16 +1,15 @@
 class JobHunter::Scraper
-  attr_accessor :query, :country, :location, :radius, :url
+  attr_accessor :url, :q, :co, :l, :radius
 
-  def initialize(url)
-    @path = path
-    @query = query
-    @country = country
-    @radius = radius
-  end
+  # def initialize(query='', country ='', location ='', radius ='')
+  #   @q = query
+  #   @co = country
+  #   @l = location
+  #   @radius = radius
+  # end
 
-  def self.scrape_jobs(url)
-    # save information as an array of hashes with metaprogramming
-    # take the string of HTML returned by open-uri's open method and convert it into a NodeSet (aka, a bunch of nested "nodes")
+  def scrape_jobs
+    url = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{q}&#{l}&sort=&#{radius}&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&#{co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
     jobs_array = []
     jobs_hash = {}
     doc = Nokogiri::XML(open(url))
@@ -26,12 +25,11 @@ class JobHunter::Scraper
           post_duration: job_result.css("formattedRelativeTime").text}
       jobs_array << jobs_hash
     end
-    puts jobs_array
-    binding.pry
+    jobs_array
   end
 
-  def self.options(array_of_key_words)
-
-  end
+  # def self.options(array_of_key_words)
+  #
+  # end
 
 end # end of class
