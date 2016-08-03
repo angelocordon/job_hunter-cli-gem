@@ -18,63 +18,31 @@ class JobHunter::CLI
     search_input =""
     input.downcase!
     search_input.downcase!
-    # welcome_prompt
-    puts "1. Name of job."
+    welcome_prompt
     while input !="exit"
-  #     # def create_jobs_array
-      input = gets
       scraper = JobHunter::Scraper.new
-  #   #   # if input == "q" || input == "co" || input == "l" || input == "radius"
-  #   #   #   search_input = gets.gsub(/\s+/, "")
-  #   #   # end
+      input = gets
       if input
-        # search_input = gets
-        # if search_input
           scraper.q = "q=" + input
-        # else
-        #   scraper.q =""
-        # end
+      end
+      input = gets
+      if input
+        scraper.co = "co=" + input
+      end
+      input = gets
+      if input
+        scraper.l = "l=" + input
+      end
+      input = gets
+      if input
+        scraper.radius = "raduis=" + input
+      end
         jobs_array = scraper.scrape_jobs
         jobs_hash = JobHunter::Jobs.create_from_collection(jobs_array)
-        # binding.pry
         job_hunter = JobHunter::Jobs.new(jobs_hash)
         job_hunter.print_jobs
-      end
-    end
-  #     # show_jobs
-  #   #
-  #   #   elsif input == 2
-  #   #     search_input = gets
-  #   #     if search_input
-  #   #       scraper.co = "co=" + search_input
-  #   #     else
-  #   #       scraper.q =""
-  #   #     end
-  #   #
-  #   #   elsif input == 3
-  #   #     search_input = gets
-  #   #     if search_input
-  #   #       scraper.l = "l=" + search_input
-  #   #     else
-  #   #       scraper.l =""
-  #   #     end
-  #   #
-  #   #   elsif input == 4
-  #   #       search_input = gets
-  #   #     if search_input
-  #   #           scraper.radius = "radius=" + search_input
-  #   #     else
-  #   #       scraper.radius =""
-  #   #     end
-  #   #
-  #   #   else
-  #   #     puts "Oops! Looks like you entered the wrong key word. Try again!"
-  #   #   end
-  #   #     scraper.scrape_jobs
-  #   #     show_jobs
-  #   # end
-  #   # binding.pry
-  #   end
+    end # end of while statement
+
   end
   #
   # def welcome_prompt
@@ -83,12 +51,12 @@ class JobHunter::CLI
   #   # puts "Type numbers 1 to 4 to start. Then enter any of the corresponding key letters / words. "
   #   puts ""
   #
-  # def welcome_prompt
-  #   puts "1. Name of job."
-  #   puts "2. co - Location based on Country."
-  #   puts "3. l - A postal code or a city."
-  #   puts "4. radius - A number for distance from search location."
-  # end
+  def welcome_prompt
+    puts "1. Name of job"
+    puts "2. Country"
+    puts "3. A postal code or a city"
+    puts "4. A number for distance from search location"
+  end
 
 
   # def show_jobs

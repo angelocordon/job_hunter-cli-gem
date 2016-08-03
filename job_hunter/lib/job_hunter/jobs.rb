@@ -9,7 +9,7 @@ class JobHunter::Jobs
      self.send("#{title}=", string)
     end
     @@all << self
-    binding.pry
+    # binding.pry
   end
 
   def self.create_from_collection(jobs_array)
