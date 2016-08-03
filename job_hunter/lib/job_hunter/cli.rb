@@ -19,28 +19,38 @@ class JobHunter::CLI
     input.downcase!
     search_input.downcase!
     welcome_prompt
+    scraper = JobHunter::Scraper.new
     while input !="exit"
-      scraper = JobHunter::Scraper.new
       input = gets
       if input
           scraper.q = "q=" + input
+      else
+        nil
       end
       input = gets
       if input
         scraper.co = "co=" + input
+      else
+        nil
       end
       input = gets
       if input
         scraper.l = "l=" + input
+      else
+        nil
       end
       input = gets
       if input
-        scraper.radius = "raduis=" + input
+        scraper.radius = "radius=" + input
+      else
+        nil
       end
+      scraper.scrape_jobs
         jobs_array = scraper.scrape_jobs
         jobs_hash = JobHunter::Jobs.create_from_collection(jobs_array)
         job_hunter = JobHunter::Jobs.new(jobs_hash)
         job_hunter.print_jobs
+        # binding.pry
     end # end of while statement
 
   end
