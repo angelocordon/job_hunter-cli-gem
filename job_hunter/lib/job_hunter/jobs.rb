@@ -25,15 +25,13 @@ class JobHunter::Jobs
     @@all
   end
 
-  def self.print_jobs
-    @@all.each do |hash|
-      hash.each do |attribute|
-        puts attribute.name
-        puts attribute.location
-        puts attribute.description
-        binding.pry
-      end
+  def print_jobs
+    self.class.all.each do |attribute|
+      puts attribute.name
+      puts attribute.location
+      puts attribute.description
+      binding.pry
     end
-  end
 
+  end
 end
