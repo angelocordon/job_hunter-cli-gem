@@ -1,62 +1,66 @@
+# Controller
 
 class JobHunter::CLI
 
   def start
     input =""
-    search_input =""
     input.downcase!
-    search_input.downcase!
-    # welcome_prompt
+    invalid = "invalid"
+    puts ""
+    puts " --------------  Welcome to Job Hunter  --------------- "
+    puts "| If you do not type any input then search will default |"
+    puts ""
     scraper = JobHunter::Scraper.new
-    while input !="exit"
-      puts "1. Name of job"
+
+    until input =="exit"
+
+      # check for input not equal to exit to prevent the cli from not exiting when type exit after prompt
+      puts "1. Enter the max number of the search results you want return"
+      if input && input!="exit"
+        input = gets.strip
+        scraper.limit = "limit=" + input
+      end
+
+      puts "2. Enter any query or name of job role"
+      if input && input!="exit"
       input = gets.strip
-      if input
           scraper.q = "q=" + input
-      else
-        nil
       end
-      puts "2. Country"
+
+      puts "3. Enter initals or name of country"
+      if input && input!="exit"
       input = gets.strip
-      if input
         scraper.co = "co=" + input
-      else
-        nil
       end
-      puts "3. A postal code or a city"
-      input = gets.strip
-      if input
+
+      puts "4. Enter a postal code or a city"
+      if input && input!="exit"
+        input = gets.strip
         scraper.l = "l=" + input
-      else
-        nil
       end
-      puts "4. A number for distance from search location"
-      input = gets.strip
-      if input
+
+      puts "5. Enter a number for distance from search location"
+      if input && input!="exit"
+        input = gets.strip
         scraper.radius = "radius=" + input
-      else
-        nil
       end
-      scraper.scrape_jobs
-       jobs_array = scraper.scrape_jobs
-       counter=0
-       jobs_array.each do |a|
-         puts "|" + "#{counter+=1}" +"|"
-         a.each do |key,value|
-           puts "#{key}: #{value}"
-         end
-         puts ""
-       end
 
-    end # end of while statement
+      if input !="exit"
+        scraper.scrape_jobs  # start scrape
+        jobs_array = scraper.scrape_jobs  # return the array of hash objects from scrape
+        counter=0 # apply numbering to results
+        jobs_array.each do |a|
+          puts "|" + "#{counter+=1}" +"|"
+          a.each do |key,value|
+            puts "#{key.capitalize}: #{value}"
+          end # end of second each enumerable
+          puts ""
+        end # end of first each enumerable
+      else
+        puts "Exit"
+      end # end of if statement
+    end  # end of until statement
 
-  end
-
-  def welcome_prompt
-    puts "1. Name of job"
-    puts "2. Country"
-    puts "3. A postal code or a city"
-    puts "4. A number for distance from search location"
-  end
+  end # end of start method
 
 end

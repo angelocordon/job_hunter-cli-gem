@@ -1,5 +1,5 @@
 class JobHunter::Jobs
-  attr_accessor :name, :company, :city, :state, :country, :url, :description, :date_posted, :post_duration
+  attr_accessor :job_role, :company, :city, :state, :country, :url, :description, :date_posted, :post_duration
 
   @@all = []
 
@@ -21,14 +21,6 @@ class JobHunter::Jobs
 
   def self.all
     @@all
-  end
-
-  def self.print_jobs
-    self.all.each do |a|
-       a.name
-       a.description
-       a.company
-    end
   end
 
 end
