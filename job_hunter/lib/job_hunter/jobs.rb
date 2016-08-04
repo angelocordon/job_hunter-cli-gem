@@ -9,7 +9,6 @@ class JobHunter::Jobs
      self.send("#{title}=", string)
     end
     @@all << self
-    # binding.pry
   end
 
   def self.create_from_collection(jobs_array)
@@ -18,6 +17,7 @@ class JobHunter::Jobs
       # and setting them equal to the attributes that the class has
       # handing it off to initialize
       # binding.pry
+
     end
   end
 
@@ -26,12 +26,11 @@ class JobHunter::Jobs
   end
 
   def print_jobs
-    self.class.all.each do |attribute|
-      puts attribute.name
-      puts attribute.location
-      puts attribute.description
-      binding.pry
+    self.all.each do |attribute|
+      puts @name
+      puts @location
+      puts @description
     end
-
   end
+
 end

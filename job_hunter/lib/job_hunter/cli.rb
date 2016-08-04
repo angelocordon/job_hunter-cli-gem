@@ -36,11 +36,10 @@ class JobHunter::CLI
       else
         nil
       end
-      scraper.scrape_jobs
+        scraper.scrape_jobs
         jobs_array = scraper.scrape_jobs
-        jobs_hash = JobHunter::Jobs.create_from_collection(jobs_array)
-        jobs_hunter = JobHunter::Jobs.new(jobs_hash)
-        jobs_hunter.print_jobs
+        puts jobs_hunter = JobHunter::Jobs.create_from_collection(jobs_array)
+        # jobs_hunter.print_jobs
         # binding.pry
     end # end of while statement
 
