@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+require_relative "../lib/job_hunter_cli"
+# requires the module
+
+JobHunterCli::CLI.new.start #instantiate the CLI

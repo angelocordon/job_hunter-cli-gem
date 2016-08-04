@@ -1,6 +1,6 @@
 # Controller
 
-class JobHunter::CLI
+class JobHunterCli::CLI
 
   def start
     input =""
@@ -10,7 +10,7 @@ class JobHunter::CLI
     puts " --------------  Welcome to Job Hunter  --------------- "
     puts "| If you do not type any input then search will default |"
     puts ""
-    scraper = JobHunter::Scraper.new
+    scraper = JobHunterCli::Scraper.new
 
     until input =="exit"
 

@@ -1,4 +1,4 @@
-class JobHunter::Scraper
+class JobHunterCli::Scraper
   # save instace variables to assign in teh CLI class when creating a new Scraper instance
   attr_accessor :q, :co, :l, :radius, :uri, :limit
 

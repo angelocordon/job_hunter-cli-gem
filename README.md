@@ -1,13 +1,13 @@
-# JobHunter
+# JobHunterCli
 
 
 ## Installation
 
-You can install this gem via gem install job_hunter-cli-gem. The job_hunter-cli-gem CLI will be installed and you can run job_hunter to search for a list of jobs via a custom search prompt in your command line.
+You can install this gem via gem install job_hunter_cli. The job_hunter_cli  will be installed and you can run job_hunter_cli to search for a list of jobs via a custom search prompt in your command line.
 
 ## Usage
 
-Run: job_hunter after installing the gem.
+Run: job_hunter_cli after installing the gem.
 
 
 ## Development
@@ -18,7 +18,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/job_hunter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/lennhy/job_hunter-cli-gem. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License

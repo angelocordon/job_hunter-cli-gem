@@ -1,4 +1,4 @@
-class JobHunter::Jobs
+class JobHunterCli::Jobs
   attr_accessor :job_role, :company, :city, :state, :country, :url, :description, :date_posted, :post_duration
 
   @@all = []
