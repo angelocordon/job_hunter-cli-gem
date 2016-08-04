@@ -1,5 +1,5 @@
 class JobHunter::Scraper
-  attr_accessor :q, :co, :l, :radius
+  attr_accessor :q, :co, :l, :radius, :uri
 
   def scrape_jobs
     uri = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{@q}&#{@l}&sort=&#{@radius}&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&#{@co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"

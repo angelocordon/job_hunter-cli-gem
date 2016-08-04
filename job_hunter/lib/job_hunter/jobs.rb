@@ -16,8 +16,6 @@ class JobHunter::Jobs
       self.new(jobs_hash) # mass assignment It's taking a hash with key and value pairs as arguments
       # and setting them equal to the attributes that the class has
       # handing it off to initialize
-      # binding.pry
-
     end
   end
 
@@ -25,11 +23,11 @@ class JobHunter::Jobs
     @@all
   end
 
-  def print_jobs
-    self.all.each do |attribute|
-      puts @name
-      puts @location
-      puts @description
+  def self.print_jobs
+    self.all.each do |a|
+       a.name
+       a.description
+       a.company
     end
   end
 

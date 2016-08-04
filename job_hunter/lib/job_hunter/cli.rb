@@ -1,3 +1,4 @@
+
 class JobHunter::CLI
 
   def start
@@ -36,11 +37,17 @@ class JobHunter::CLI
       else
         nil
       end
-        scraper.scrape_jobs
-        jobs_array = scraper.scrape_jobs
-        puts jobs_hunter = JobHunter::Jobs.create_from_collection(jobs_array)
-        # jobs_hunter.print_jobs
-        # binding.pry
+      scraper.scrape_jobs
+       jobs_array = scraper.scrape_jobs
+       counter=0
+       jobs_array.each do |a|
+         puts "|" + "#{counter+=1}" +"|"
+         a.each do |key,value|
+           puts "#{key}: #{value}"
+         end
+         puts ""
+       end
+
     end # end of while statement
 
   end
@@ -51,14 +58,5 @@ class JobHunter::CLI
     puts "3. A postal code or a city"
     puts "4. A number for distance from search location"
   end
-
-
-  # def show_jobs
-
-  # end
-
-  # def print_job_details
-  #
-  # end
 
 end
