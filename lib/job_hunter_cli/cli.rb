@@ -7,9 +7,9 @@ class JobHunterCli::CLI
     input.downcase!
     invalid = "invalid"
     puts ""
-    puts "  ---------------------------------- | WELCOME TO JOB HUNTER |------------------------------------ "
-    puts "         If you press enter without input then search will return its default values             "
-    puts "           Job Hunter shows you only the most recent jobs posted on Indeed.com                   "
+    puts "  ---------------------------------- | WELCOME TO JOB HUNTER |-------------------------------- "
+    puts "         If you press enter without input then search will return its default values           "
+    puts "           Job Hunter shows you only the most recent jobs posted on Indeed.com                 "
     puts ""
     scraper = JobHunterCli::Scraper.new
 
