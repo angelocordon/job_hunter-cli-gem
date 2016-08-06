@@ -4,7 +4,7 @@ class JobHunterCli::Scraper
 
   def scrape_jobs
     # indeed.com api uses XML. To parse in XLM use Nokogiri
-    uri = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{@q}&#{@l}&sort=&#{@radius}&st=&jt=&start=&#{@limit}&fromage=&filter=&latlong=1&#{@co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
+    uri = "http://api.indeed.com/ads/apisearch?publisher=3881286689960538&#{@q}&#{@l}&sort=date&#{@radius}&st=&jt=&start=&#{@limit}&fromage=&filter=&latlong=1&#{@co}&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2"
     jobs_array = []
     jobs_hash = {}
     doc = Nokogiri::XML(open(uri))
