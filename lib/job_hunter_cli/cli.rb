@@ -1,66 +1,74 @@
 # Controller
-
 class JobHunterCli::CLI
 
   def start
-    input =""
-    input.downcase!
-    invalid = "invalid"
     puts ""
     puts "  ---------------------------------- | WELCOME TO JOB HUNTER |-------------------------------- "
-    puts "         If you press enter without input then search will return its default values           "
-    puts "           Job Hunter shows you only the most recent jobs posted on Indeed.com                 "
+    puts "            Job Hunter shows you only the most recent jobs posted on Indeed.com                "
+    puts "  -------------------------------------------------------------------------------------------- "
     puts ""
-    scraper = JobHunterCli::Scraper.new
+    puts "        Note: If you press enter without input then search will return its default values       "
+    puts "                          Press exit anytime to exit search and start over                    "
+    puts ""
+    user_input
+  end
 
-    until input =="exit"
-      # check for input not equal to exit to prevent the cli from not exiting when type exit after prompt
-      if input !="exit"
+  def user_input
+    input =nil
+    if input != "exit"
+      scraper = JobHunterCli::Scraper.new # instantiate the scraper class and save it in a local variable
+
       puts "1. Enter the max number of the search results you want return. Defaults to 10 if not specified"
-        input = gets.strip
-        scraper.limit = "limit=" + input
-      end
+      input = gets.strip
+      scraper.limit = "limit=" + input
 
-      if input!="exit"
       puts "2. Enter any query or name of job role"
       input = gets.strip
-          scraper.q = "q=" + input
-      end
+      scraper.q = "q=" + input
 
-      if input!="exit"
       puts "3. Enter initals or name of country. Defaults to US if not specified"
       input = gets.strip
-        scraper.co = "co=" + input
-      end
+      scraper.co = "co=" + input
 
-      if input!="exit"
       puts "4. Enter a postal code or a city"
-        input = gets.strip
-        scraper.l = "l=" + input
-      end
+      input = gets.strip
+      scraper.l = "l=" + input
 
-      if input!="exit"
       puts "5. Enter a number for distance from search location. Defaults to 25 if not specified"
-        input = gets.strip
-        scraper.radius = "radius=" + input
-      end
+      input = gets.strip
+      scraper.radius = "radius=" + input
 
-      if input != "exit"
-        scraper.scrape_jobs  # start scrape
-        jobs_array = scraper.scrape_jobs  # return the array of hash objects from scrape
-        counter=0 # apply numbering to results
-        jobs_array.each do |a|
-          puts "|" + "#{counter+=1}" +"|"
-          a.each do |key,value|
-            puts "#{key.capitalize}: #{value}"
-          end # end of second each enumerable
-          puts ""
-        end # end of first each enumerable
-      else
-        puts "Search Ended"
-      end # end of last if statement on line 47
-    end  # end of until statement
+      scraper.scrape_jobs  # start scrape
+      print_jobs
+    end
+    prompt_after_search
+  end
 
-  end # end of start method
+  def print_jobs
+    counter = 0 # apply numbering to results
+    JobHunterCli::Job.all.each do |job_details|
+      puts ""
+      puts "#{counter+=1}. " + job_details.job_role
+      puts "    • " + job_details.company
+      puts "    • " + job_details.city + ", " + job_details.state + " - " +job_details.country
+      puts "    • " + job_details.date_posted
+      puts "    • " + job_details.post_duration
+      puts "    • " + job_details.description
+      puts "    • " + job_details.url 
+    end # end of second each enumerable
+  end # end of print_jobs method
 
-end
+  def prompt_after_search
+    puts ""
+    puts "--------------------| Search Completed |----------------------"
+    puts "    Type 'start' to start over or 'exit' to exit search    "
+    input = gets.strip
+    if input == "exit"
+      puts "Search Ended...."
+    elsif input == "start"
+      puts "Enter New Search"
+      self.user_input
+    end
+  end
+
+end # end of class
