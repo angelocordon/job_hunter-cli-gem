@@ -11,38 +11,30 @@ class JobHunterCli::CLI
     puts "        Note: If you press enter without input then search will return its default values       "
     puts "                          Press exit anytime to exit search and start over                    "
     puts ""
-    user_input
+    define_scraper
   end
 
-  def user_input
-    input =nil
-    if input != "exit"
+  def define_scraper
       scraper = JobHunterCli::Scraper.new # instantiate the scraper class and save it in a local variable
 
       puts "1. Enter the max number of the search results you want return. Defaults to 10 if not specified"
-      input = gets.strip
-      scraper.limit = "limit=" + input
-
+      scraper.limit = scraper_queries("limit")
       puts "2. Enter any query or name of job role"
-      input = gets.strip
-      scraper.q = "q=" + input
-
+      scraper.q = scraper_queries("q")
       puts "3. Enter initals or name of country. Defaults to US if not specified"
-      input = gets.strip
-      scraper.co = "co=" + input
-
+      scraper.co = scraper_queries("co")
       puts "4. Enter a postal code or a city"
-      input = gets.strip
-      scraper.l = "l=" + input
-
+      scraper.l = scraper_queries("l")
       puts "5. Enter a number for distance from search location. Defaults to 25 if not specified"
-      input = gets.strip
-      scraper.radius = "radius=" + input
-
+      scraper.radius = scraper_queries("radius")
       scraper.scrape_jobs  # start scrape
       print_jobs
-    end
-    prompt_after_search
+      prompt_after_search
+  end
+
+  def scraper_queries(query_type)
+    input = gets.strip
+    "#{query_type}=#{input}"
   end
 
   def print_jobs
@@ -68,7 +60,7 @@ class JobHunterCli::CLI
       puts "Search Ended...."
     elsif input == "start"
       puts "Enter New Search"
-      self.user_input
+      self.define_scraper
     end
   end
 
