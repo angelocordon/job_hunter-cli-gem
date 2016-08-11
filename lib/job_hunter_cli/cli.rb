@@ -1,4 +1,5 @@
 # Controller
+# For review
 class JobHunterCli::CLI
 
   def start
@@ -54,7 +55,7 @@ class JobHunterCli::CLI
       puts "    • " + job_details.date_posted
       puts "    • " + job_details.post_duration
       puts "    • " + job_details.description
-      puts "    • " + job_details.url 
+      puts "    • " + job_details.url
     end # end of second each enumerable
   end # end of print_jobs method
 
